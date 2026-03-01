@@ -1,18 +1,19 @@
 import dataclasses
 
+from fields import TitleField
+from mixins import LinkMixin
+
 
 @dataclasses.dataclass
 class FooterSchema:
-    columns: Columns
+    columns: list[Columns]
 
 
 @dataclasses.dataclass
-class Columns:
-    title: str
-    links: Links
+class Columns(TitleField):
+    links: list[Links]
 
 
 @dataclasses.dataclass
-class Links:
-    label: str
-    url: str
+class Links(LinkMixin):
+    ...

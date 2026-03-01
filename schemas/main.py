@@ -1,8 +1,8 @@
 import dataclasses
 
+from mixins import TitleSummaryDescMixin
+
 
 @dataclasses.dataclass
-class MainSchema:
-    title: str
-    summary: str
-    description: str
+class MainSchema(TitleSummaryDescMixin):
+    ...
