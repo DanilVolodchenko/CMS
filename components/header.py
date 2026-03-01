@@ -1,15 +1,7 @@
-import dataclasses
-
-from components.base import BaseComponent, BaseShema
-
-
-@dataclasses.dataclass
-class MainSchema(BaseShema):
-    title: str
-    summary: str
-    description: str
+from components.base import BaseComponent
+from schemas.header import HeaderSchema
 
 
-class MainComponent(BaseComponent):
+class HeaderComponent(BaseComponent):
     name = 'main'
-    schema = MainSchema
+    schema = HeaderSchema

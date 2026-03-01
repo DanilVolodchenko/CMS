@@ -24,3 +24,8 @@ class LabelField:
 @dataclasses.dataclass
 class UrlField:
     url: str
+
+
+@dataclasses.dataclass
+class NavigationField:
+    navigation: list[str]
