@@ -1,7 +1,12 @@
-from components.footer import FooterComponent
-from components.main import MainComponent
-from components.header import HeaderComponent
+import uvicorn
 
+from core.config import Config
+from core.registrar import create_app
 
-if __name__ == "__main__":
-    print(HeaderComponent.generate_schema())
+__version__ = '0.0.1'
+
+config = Config()
+app = create_app(config.fastapi, version=__version__)
+
+if __name__ == '__main__':
+    uvicorn.run('main:app', reload=True)
