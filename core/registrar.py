@@ -1,7 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
+from fastapi.responses import JSONResponse
+from that_depends.providers import DIContextMiddleware
 
 from core.config import FastApiConfig
 from controllers.http import router
+from errors import BaseError
+from ioc import Container
 
 
 def create_app(fastapi_conf: FastApiConfig, version: str) -> FastAPI:
@@ -9,4 +13,16 @@ def create_app(fastapi_conf: FastApiConfig, version: str) -> FastAPI:
 
     app.include_router(router)
 
+    add_exception_handlers(app)
+
     return app
+
+
+def add_middleware(app: FastAPI) -> None:
+    app.add_middleware(DIContextMiddleware, Container)
+
+
+def add_exception_handlers(app: FastAPI) -> None:
+    @app.exception_handler(BaseError)
+    def add_base_error_handler(request: Request, exc: BaseError):
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={'detail': str(exc)})
