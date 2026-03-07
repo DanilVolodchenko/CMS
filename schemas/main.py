@@ -1,6 +1,6 @@
 import dataclasses
 
-from mixins import TitleSummaryDescMixin
+from infrastructure.mixins import TitleSummaryDescMixin
 
 
 @dataclasses.dataclass

@@ -1,6 +1,6 @@
-from typing import Any, Union, TYPE_CHECKING, get_args, get_origin
+from typing import Any, TYPE_CHECKING, get_args, get_origin
 
-from generators.base import IFieldGenerator
+from infrastructure.generators.base import IFieldGenerator
 
 if TYPE_CHECKING:
     from dispatcher import FieldDispatcher

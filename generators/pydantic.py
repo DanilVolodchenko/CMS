@@ -1,6 +1,6 @@
 from typing import Any, TYPE_CHECKING
 
-from generators.base import IFieldGenerator
+from infrastructure.generators.base import IFieldGenerator
 
 if TYPE_CHECKING:
     from dispatcher import FieldDispatcher

@@ -1,5 +1,5 @@
-from components.base import BaseComponent
-from schemas.footer import FooterSchema
+from infrastructure.components.base import BaseComponent
+from infrastructure.schemas.footer import FooterSchema
 
 
 class FooterComponent(BaseComponent):

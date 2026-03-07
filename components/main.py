@@ -1,5 +1,5 @@
-from components.base import BaseComponent
-from schemas.main import MainSchema
+from infrastructure.components.base import BaseComponent
+from infrastructure.schemas.main import MainSchema
 
 
 class MainComponent(BaseComponent):

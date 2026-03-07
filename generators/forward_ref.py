@@ -1,7 +1,7 @@
 from typing import Any, TYPE_CHECKING
 from annotationlib import ForwardRef
 
-from generators import IFieldGenerator
+from infrastructure.generators import IFieldGenerator
 
 if TYPE_CHECKING:
     from dispatcher import FieldDispatcher

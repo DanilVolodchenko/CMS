@@ -1,6 +1,6 @@
 import dataclasses
 
-from fields import TitleField, NavigationField
+from infrastructure.fields import TitleField, NavigationField
 
 
 @dataclasses.dataclass

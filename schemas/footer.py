@@ -1,7 +1,7 @@
 import dataclasses
 
-from fields import TitleField
-from mixins import LinkMixin
+from infrastructure.fields import TitleField
+from infrastructure.mixins import LinkMixin
 
 
 @dataclasses.dataclass

@@ -1,5 +1,5 @@
-from components.base import BaseComponent
-from schemas.header import HeaderSchema
+from infrastructure.components.base import BaseComponent
+from infrastructure.schemas import HeaderSchema
 
 
 class HeaderComponent(BaseComponent):
