@@ -1,15 +1,17 @@
 import abc
 
-
-class IGetRepository[T](abc.ABC):
-
-    @abc.abstractmethod
-    def get(self, **kwargs) -> T:
-        ...
+from domain.entities import PageDM
 
 
-class ISaveRepository[T](abc.ABC):
+class IGetComponent(abc.ABC):
 
     @abc.abstractmethod
-    def save(self, obj: T) -> None:
-        ...
+    def get_by_page(self, page: str) -> PageDM:
+        """Returns components by page."""
+
+
+class ISaveComponent(abc.ABC):
+
+    @abc.abstractmethod
+    def save(self, page: PageDM) -> None:
+        """Saves component to page."""
