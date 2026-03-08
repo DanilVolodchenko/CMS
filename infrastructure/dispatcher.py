@@ -1,20 +1,19 @@
-from typing import Any
+from typing import Any, ClassVar
 
-from generators import IFieldGenerator
+from infrastructure.generators import IFieldGenerator
 
 
 class FieldDispatcher:
+    _generators: ClassVar[list[IFieldGenerator]] = IFieldGenerator.registry
 
-    def __init__(self):
-        self._generators: list[IFieldGenerator] = IFieldGenerator.registry
-
-    def generate(self, schema: Any) -> Any:
-        for generator in self._generators:
+    @classmethod
+    def generate(cls, schema: Any) -> Any:
+        for generator in cls._generators:
             if generator.supports(schema):
-                return generator.generate(schema, self)
+                return generator.generate(schema, cls)
 
-        return self._get_type_name(schema)
+        return cls.get_type_name(schema)
 
     @staticmethod
-    def _get_type_name(obj: Any) -> str:
-        return getattr(obj, "__name__", str(obj))
+    def get_type_name(obj: Any) -> str:
+        return getattr(obj, '__name__', str(obj))
