@@ -1,7 +1,7 @@
 from that_depends import BaseContainer, providers
 
 from application import interactors
-from domain.storage import ComponentStorage
+from infrastructure.resources.storage import ComponentStorage
 from infrastructure.components import BaseComponent
 from infrastructure.dispatcher import FieldDispatcher
 from infrastructure.gateways import ComponentStorageGateway

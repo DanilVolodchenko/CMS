@@ -1,6 +1,6 @@
 from application.interfaces import IGetComponent, ISaveComponent
 from domain.entities import PageDM
-from domain.storage import ComponentStorage
+from infrastructure.resources.storage import ComponentStorage
 
 
 class ComponentStorageGateway(IGetComponent, ISaveComponent):
