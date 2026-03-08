@@ -2,10 +2,8 @@ from typing import Any
 
 
 class ComponentStorage:
-
     def __init__(self) -> None:
         self._components = {}
-
 
     def get_components(self, page: str) -> list[dict[str, Any]]:
         return self._components[page]
