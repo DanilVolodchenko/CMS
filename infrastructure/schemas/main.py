@@ -4,5 +4,4 @@ from infrastructure.mixins import TitleSummaryDescMixin
 
 
 @dataclasses.dataclass
-class MainSchema(TitleSummaryDescMixin):
-    ...
+class MainSchema(TitleSummaryDescMixin): ...

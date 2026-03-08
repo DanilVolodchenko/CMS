@@ -3,5 +3,5 @@ from schemas.main import MainSchema
 
 
 class MainComponent(BaseComponent):
-    name = 'main'
+    name = "main"
     schema = MainSchema

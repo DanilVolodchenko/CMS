@@ -1,16 +1,16 @@
 import abc
-from typing import Any, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from dispatcher import FieldDispatcher
+    from infrastructure.dispatcher import FieldDispatcher
 
 
 class IFieldGenerator(abc.ABC):
-    registry: list['IFieldGenerator'] = []
+    registry: list[IFieldGenerator] = []
 
-    def __init_subclass__(cls, **kwargs) -> None:
+    def __init_subclass__(cls, **kwargs: Any) -> None:
         super().__init_subclass__(**kwargs)
-        if not abc.ABC in cls.__bases__:
+        if abc.ABC not in cls.__bases__:
             IFieldGenerator.registry.append(cls())
 
     @classmethod
@@ -19,5 +19,5 @@ class IFieldGenerator(abc.ABC):
         """Can support that type of schema."""
 
     @abc.abstractmethod
-    def generate(self, schema: Any, dispatcher: 'FieldDispatcher') -> Any:
+    def generate(self, schema: Any, dispatcher: type[FieldDispatcher]) -> Any:
         """Generate data from schema."""

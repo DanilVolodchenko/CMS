@@ -3,5 +3,5 @@ from schemas.header import HeaderSchema
 
 
 class HeaderComponent(BaseComponent):
-    name = 'header'
+    name = "header"
     schema = HeaderSchema

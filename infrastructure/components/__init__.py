@@ -1,8 +1,8 @@
 from components.base import BaseComponent
-from components.main import MainComponent
 from components.footer import FooterComponent
 from components.header import HeaderComponent
+from components.main import MainComponent
 
 __all__ = [
-    BaseComponent, MainComponent, FooterComponent, HeaderComponent
+    BaseComponent, MainComponent, FooterComponent, HeaderComponent,
 ]

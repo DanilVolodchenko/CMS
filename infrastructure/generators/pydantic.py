@@ -1,6 +1,6 @@
-from typing import Any, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
-from infrastructure.generators.base import IFieldGenerator
+from generators.base import IFieldGenerator
 
 if TYPE_CHECKING:
     from dispatcher import FieldDispatcher
@@ -17,7 +17,7 @@ class PydanticGenerator(IFieldGenerator):
     def supports(cls, schema: Any) -> bool:
         return BaseModel is not None and isinstance(schema, type) and issubclass(schema, BaseModel)
 
-    def generate(self, schema: Any, dispatcher: 'FieldDispatcher') -> dict:
+    def generate(self, schema: Any, dispatcher: FieldDispatcher) -> dict:
         result = {}
 
         # pydantic v2

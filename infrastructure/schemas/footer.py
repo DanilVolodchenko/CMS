@@ -15,5 +15,4 @@ class Columns(TitleField):
 
 
 @dataclasses.dataclass
-class Links(LinkMixin):
-    ...
+class Links(LinkMixin): ...

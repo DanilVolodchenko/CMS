@@ -1,5 +1,5 @@
 import dataclasses
-from typing import Any, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from generators.base import IFieldGenerator
 
@@ -13,7 +13,7 @@ class DataclassGenerator(IFieldGenerator):
     def supports(cls, schema: Any) -> bool:
         return dataclasses.is_dataclass(schema)
 
-    def generate(self, schema: Any, dispatcher: 'FieldDispatcher') -> dict:
+    def generate(self, schema: Any, dispatcher: FieldDispatcher) -> dict:
         result = {}
 
         for field in dataclasses.fields(schema):
