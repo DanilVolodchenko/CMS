@@ -1,8 +1,8 @@
 from dotenv import dotenv_values
 from pydantic import BaseModel, Field
 
+env: dict = dotenv_values('.env')
 
-env = dotenv_values('.env')
 
 class FastApiConfig(BaseModel):
     title: str = Field(default='CRM', alias='FASTAPI_TITLE')
