@@ -1,10 +1,11 @@
 from typing import Any
 
+from application.dto import NewPageComponentDTO
 from application.interfaces import IGetComponent, ISaveComponent
 from domain import entities
-from components import BaseComponent
 from errors import ComponentNotFoundError, PageNotFoundError
-from application.dto import NewPageComponentDTO
+from infrastructure.components import BaseComponent
+
 
 class GetComponentsSchemaInteractor:
     def __init__(self, component: BaseComponent) -> None:
@@ -22,8 +23,7 @@ class GetComponentSchemaByNameInteractor:
         for component in self._component.registry:
             if component.name == name:
                 return component.generate_schema()
-        else:
-            raise ComponentNotFoundError(f'Component `{name}` not found!')
+        raise ComponentNotFoundError(f'Component `{name}` not found!')
 
 
 class GetComponentsByPathInteractor:
@@ -34,13 +34,14 @@ class GetComponentsByPathInteractor:
         try:
             return self._component_gateway.get_by_page(page=page)
         except KeyError:
-            raise PageNotFoundError(f'Page `{page}` not found')
+            raise PageNotFoundError(f'Page `{page}` not found') from None
+
 
 class CreateComponentInteractor:
     def __init__(self, component_gateway: ISaveComponent) -> None:
         self._component_gateway = component_gateway
 
     def __call__(self, page_dto: NewPageComponentDTO) -> None:
-        page_dm = entities.PageDM(page=page_dto.page,components=page_dto.components)
+        page_dm = entities.PageDM(page=page_dto.page, components=page_dto.components)
 
         self._component_gateway.save(page_dm)

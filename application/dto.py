@@ -1,6 +1,5 @@
-from typing import Any
-
 import dataclasses
+from typing import Any
 
 
 @dataclasses.dataclass(frozen=True)
