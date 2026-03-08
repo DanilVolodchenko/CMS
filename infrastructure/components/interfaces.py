@@ -1,11 +1,11 @@
 import abc
-from typing import Any
+from typing import Any, ClassVar
 
 from infrastructure.dispatcher import FieldDispatcher
 
 
 class BaseComponent(abc.ABC):
-    registry: list[BaseComponent] = []
+    registry: ClassVar[list[BaseComponent]] = []
 
     name: str
     schema: Any

@@ -1,7 +1,7 @@
-from components.base import BaseComponent
-from schemas.main import MainSchema
+from infrastructure.components.interfaces import BaseComponent
+from infrastructure.schemas.main import MainSchema
 
 
 class MainComponent(BaseComponent):
-    name = "main"
+    name = 'main'
     schema = MainSchema

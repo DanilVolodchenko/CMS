@@ -1,7 +1,7 @@
-from components.base import BaseComponent
-from schemas.footer import FooterSchema
+from infrastructure.components.interfaces import BaseComponent
+from infrastructure.schemas.footer import FooterSchema
 
 
 class FooterComponent(BaseComponent):
-    name = "footer"
+    name = 'footer'
     schema = FooterSchema
