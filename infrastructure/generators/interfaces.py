@@ -1,12 +1,12 @@
 import abc
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, ClassVar
 
 if TYPE_CHECKING:
     from infrastructure.dispatcher import FieldDispatcher
 
 
 class IFieldGenerator(abc.ABC):
-    registry: list[IFieldGenerator] = []
+    registry: ClassVar[list[IFieldGenerator]] = []
 
     def __init_subclass__(cls, **kwargs: Any) -> None:
         super().__init_subclass__(**kwargs)
