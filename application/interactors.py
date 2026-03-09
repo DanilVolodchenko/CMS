@@ -4,7 +4,7 @@ from application.dto import NewPageComponentDTO
 from application.interfaces import IGetComponent, ISaveComponent
 from domain import entities
 from errors import ComponentNotFoundError, PageNotFoundError
-from infrastructure.components import BaseComponent
+from infrastructure.components.interfaces import BaseComponent
 
 
 class GetComponentsSchemaInteractor:

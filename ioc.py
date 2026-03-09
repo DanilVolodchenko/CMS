@@ -1,13 +1,16 @@
 from that_depends import BaseContainer, providers
 
 from application import interactors
-from infrastructure.resources.storage import ComponentStorage
-from infrastructure.components import BaseComponent
+from infrastructure.builder import Builder
+from infrastructure.components.interfaces import BaseComponent
 from infrastructure.dispatcher import FieldDispatcher
 from infrastructure.gateways import ComponentStorageGateway
+from infrastructure.resources.storage import ComponentStorage
 
 
 class Container(BaseContainer):
+    builder = providers.Singleton(Builder)
+
     dispatcher = providers.Singleton(FieldDispatcher)
 
     component = providers.Singleton(BaseComponent)

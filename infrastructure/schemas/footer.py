@@ -6,13 +6,13 @@ from infrastructure.mixins import LinkMixin
 
 @dataclasses.dataclass
 class FooterSchema:
-    columns: list[Columns]
+    columns: list[Column]
 
 
 @dataclasses.dataclass
-class Columns(TitleField):
-    links: list[Links]
+class Column(TitleField):
+    links: list[Link]
 
 
 @dataclasses.dataclass
-class Links(LinkMixin): ...
+class Link(LinkMixin): ...

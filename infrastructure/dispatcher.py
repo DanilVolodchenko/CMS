@@ -1,6 +1,6 @@
 from typing import Any, ClassVar
 
-from infrastructure.generators import IFieldGenerator
+from infrastructure.generators.interfaces import IFieldGenerator
 
 
 class FieldDispatcher:
