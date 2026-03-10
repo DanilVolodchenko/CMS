@@ -9,7 +9,7 @@ from that_depends.providers import DIContextMiddleware
 from controllers.http import router
 from core.config import FastApiConfig
 from errors import BaseError
-from infrastructure.builder import Builder
+from infrastructure.builder import RegisterBuilder
 from infrastructure.components import footer, header, main
 from infrastructure.generators import container, dataclass, forward_ref, pydantic
 from ioc import Container
@@ -38,7 +38,7 @@ def add_exception_handlers(app: FastAPI) -> None:
 
 
 @inject
-def collect_builder(builder: Builder = Provide[Container.builder]) -> None:
+def collect_builder(builder: RegisterBuilder = Provide[Container.register_builder]) -> None:
     builder.add_components(
         main.MainComponent,
         footer.FooterComponent,

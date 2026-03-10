@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Any, get_args, get_origin
 from infrastructure.generators.interfaces import IFieldGenerator
 
 if TYPE_CHECKING:
-    from infrastructure.dispatcher import FieldDispatcher
+    from infrastructure.dispatcher import IFieldDispatcher
 
 
 class ContainerGenerator(IFieldGenerator):
@@ -11,7 +11,7 @@ class ContainerGenerator(IFieldGenerator):
     def supports(cls, schema: Any) -> bool:
         return get_origin(schema) is not None
 
-    def generate(self, schema: Any, dispatcher: type[FieldDispatcher]) -> Any:
+    def generate(self, schema: Any, dispatcher: IFieldDispatcher) -> Any:
         origin = get_origin(schema)
         args = get_args(schema)
 

@@ -1,28 +1,33 @@
-from typing import Any
 
-from application.dto import NewPageComponentDTO
+from application.dto import ComponentDTO, NewPageComponentDTO
 from application.interfaces import IGetComponent, ISaveComponent
 from domain import entities
 from errors import ComponentNotFoundError, PageNotFoundError
-from infrastructure.components.interfaces import BaseComponent
+from infrastructure.builder import RegisterBuilder
+from infrastructure.dispatcher import IFieldDispatcher
 
 
 class GetComponentsSchemaInteractor:
-    def __init__(self, component: BaseComponent) -> None:
-        self._component = component
+    def __init__(self, register_builder: RegisterBuilder, dispatcher: IFieldDispatcher) -> None:
+        self._builder = register_builder
+        self._dispatcher = dispatcher
 
-    def __call__(self) -> list[dict[str, Any]]:
-        return [component.generate_schema() for component in self._component.registry]
+    def __call__(self) -> list[ComponentDTO]:
+        return [
+            ComponentDTO(name=component.name, fields=self._dispatcher.generate(component.schema))
+            for component in self._builder.get_components()
+        ]
 
 
 class GetComponentSchemaByNameInteractor:
-    def __init__(self, component: BaseComponent) -> None:
-        self._component = component
+    def __init__(self, register_builder: RegisterBuilder, dispatcher: IFieldDispatcher) -> None:
+        self._builder = register_builder
+        self._dispatcher = dispatcher
 
-    def __call__(self, name: str) -> dict[str, Any]:
-        for component in self._component.registry:
+    def __call__(self, name: str) -> ComponentDTO:
+        for component in self._builder.get_components():
             if component.name == name:
-                return component.generate_schema()
+                return ComponentDTO(name=component.name, fields=self._dispatcher.generate(component.schema))
         raise ComponentNotFoundError(f'Component `{name}` not found!')
 
 

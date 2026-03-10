@@ -1,7 +1,7 @@
-from infrastructure.components.interfaces import BaseComponent
+from infrastructure.components.interfaces import IComponent
 from infrastructure.schemas.header import HeaderSchema
 
 
-class HeaderComponent(BaseComponent):
+class HeaderComponent(IComponent):
     name = 'header'
     schema = HeaderSchema

@@ -6,3 +6,9 @@ from typing import Any
 class NewPageComponentDTO:
     page: str
     components: list[Any]
+
+
+@dataclasses.dataclass(frozen=True)
+class ComponentDTO:
+    name: str
+    fields: Any

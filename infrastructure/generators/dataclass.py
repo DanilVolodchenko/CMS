@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Any
 from infrastructure.generators.interfaces import IFieldGenerator
 
 if TYPE_CHECKING:
-    from infrastructure.dispatcher import FieldDispatcher
+    from infrastructure.dispatcher import IFieldDispatcher
 
 
 class DataclassGenerator(IFieldGenerator):
@@ -12,7 +12,7 @@ class DataclassGenerator(IFieldGenerator):
     def supports(cls, schema: Any) -> bool:
         return dataclasses.is_dataclass(schema)
 
-    def generate(self, schema: Any, dispatcher: type[FieldDispatcher]) -> dict:
+    def generate(self, schema: Any, dispatcher: IFieldDispatcher) -> dict:
         result = {}
 
         for field in dataclasses.fields(schema):

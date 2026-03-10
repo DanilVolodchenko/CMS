@@ -8,7 +8,7 @@ class ComponentStorageGateway(IGetComponent, ISaveComponent):
         self._storage = storage
 
     def get_by_page(self, page: str) -> PageDM:
-        components = self._storage.get_components(page)
+        components = self._storage.get_components_by_page(page)
         return PageDM(page=page, components=components)
 
     def save(self, page: PageDM) -> None:
