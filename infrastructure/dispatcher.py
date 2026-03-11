@@ -1,7 +1,7 @@
 import abc
 from typing import Any
 
-from infrastructure.builder import RegisterBuilder
+from infrastructure.builder import IFieldGeneratorBuilder
 
 
 class IFieldDispatcher(abc.ABC):
@@ -17,7 +17,7 @@ class IFieldDispatcher(abc.ABC):
 
 class FieldDispatcher(IFieldDispatcher):
 
-    def __init__(self, builder: RegisterBuilder) -> None:
+    def __init__(self, builder: IFieldGeneratorBuilder) -> None:
         self._builder = builder
 
     def generate(self, schema: Any) -> Any:
