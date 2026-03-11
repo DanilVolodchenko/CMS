@@ -40,9 +40,7 @@ class RegisterBuilder(IComponentBuilder, IFieldGeneratorBuilder):
         return self._generators
 
     def add_components(self, *components: type[IComponent]) -> None:
-        for component in components:
-            self._components.append(component)
+        self._components.extend(components)
 
     def add_generators(self, *generators: type[IFieldGenerator]) -> None:
-        for generator in generators:
-            self._generators.append(generator)
+        self._generators.extend(generators)
