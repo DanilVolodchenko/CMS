@@ -20,7 +20,7 @@ class TestComponentStorage:
     def test_get_component_if_storage_not_empty(self, component_storage: ComponentStorage) -> None:
         """Testing method get_component if it is not empty."""
 
-        component_storage._components['/test'] = [{'component': '1'}]
+        component_storage._components['/test'] = [{'component': '1'}]  # noqa: SLF001
 
         result = component_storage.get_components_by_page('/test')
         expected_result = [{'component': '1'}]
@@ -32,7 +32,7 @@ class TestComponentStorage:
 
         component_storage.add_components('/test', [{'component': '1'}])
 
-        result = component_storage._components
+        result = component_storage._components  # noqa: SLF001
         expected_result = {'/test': [{'component': '1'}]}
 
         assert result == expected_result, f'Expected result {expected_result}, result {result}'
@@ -43,7 +43,7 @@ class TestComponentStorage:
         component_storage.add_components('/test', [{'component': '1'}])
         component_storage.add_components('/test', [{'component': '2'}])
 
-        result = component_storage._components
+        result = component_storage._components  # noqa: SLF001
         expected_result = {'/test': [{'component': '2'}]}
 
         assert result == expected_result, f'Expected result {expected_result}, result {result}'
