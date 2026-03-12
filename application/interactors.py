@@ -1,4 +1,3 @@
-
 from application.dto import ComponentDTO, NewPageComponentDTO
 from application.interfaces import IGetComponent, ISaveComponent
 from domain import entities
