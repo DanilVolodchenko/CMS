@@ -1,0 +1,32 @@
+from typing import TYPE_CHECKING, Any
+
+from infrastructure.generators.interfaces import IFieldGenerator
+
+if TYPE_CHECKING:
+    from infrastructure.dispatcher import IFieldDispatcher
+
+try:
+    from pydantic import BaseModel
+except ImportError:
+    BaseModel: Any = None
+
+
+class PydanticGenerator(IFieldGenerator):
+    @classmethod
+    def supports(cls, schema: Any) -> bool:
+        return BaseModel is not None and isinstance(schema, type) and issubclass(schema, BaseModel)
+
+    def generate(self, schema: Any, dispatcher: IFieldDispatcher) -> dict:
+        result = {}
+
+        # pydantic v2
+        if hasattr(schema, 'model_fields'):
+            for name, field in schema.model_fields.items():
+                result[name] = dispatcher.generate(field.annotation)
+
+        # pydantic v1
+        elif hasattr(schema, '__fields__'):
+            for name, field in schema.__fields__.items():
+                result[name] = dispatcher.generate(field.outer_type_)
+
+        return result
