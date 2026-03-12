@@ -2,8 +2,8 @@ from unittest import mock
 
 import pytest
 
-from infrastructure.gateways import ComponentStorageGateway
 from domain.entities import PageDM
+from infrastructure.gateways import ComponentStorageGateway
 
 
 class TestComponentStorageGateway:

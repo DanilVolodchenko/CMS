@@ -3,8 +3,8 @@ from typing import Any
 
 import pytest
 
-from infrastructure.generators.forward_ref import ForwardRefGenerator
 from infrastructure.dispatcher import IFieldDispatcher
+from infrastructure.generators.forward_ref import ForwardRefGenerator
 
 
 @pytest.fixture
@@ -18,7 +18,7 @@ def dispatcher() -> IFieldDispatcher:
         def generate(self, schema: Any) -> Any:
             return str
 
-        def get_type_name(self, obj: Any) -> str: ...
+        def get_type_name(self, obj: Any) -> str: ...  # type: ignore[empty-body]
 
     return MockDispatcher()
 
@@ -47,7 +47,7 @@ class TestForwardRefGenerator:
         assert result == expected_result, f'Expected result {expected_result}, result {result}'
 
     def test_generate_if_schema_is_forward_ref(
-            self, forward_ref_generator: ForwardRefGenerator, dispatcher: IFieldDispatcher
+            self, forward_ref_generator: ForwardRefGenerator, dispatcher: IFieldDispatcher,
     ) -> None:
         """Tests generate method if schema is ForwardRef."""
 
@@ -59,7 +59,7 @@ class TestForwardRefGenerator:
         assert result == expected_result, f'Expected result {expected_result}, result {result}'
 
     def test_generate_if_schema_is_not_dataclass(
-            self, forward_ref_generator: ForwardRefGenerator, dispatcher: IFieldDispatcher
+            self, forward_ref_generator: ForwardRefGenerator, dispatcher: IFieldDispatcher,
     ) -> None:
         """Tests generate method if schema is not dataclass."""
 

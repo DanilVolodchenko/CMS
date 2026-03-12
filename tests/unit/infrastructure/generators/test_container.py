@@ -2,8 +2,8 @@ from typing import Any
 
 import pytest
 
-from infrastructure.generators.container import ContainerGenerator
 from infrastructure.dispatcher import IFieldDispatcher
+from infrastructure.generators.container import ContainerGenerator
 
 
 @pytest.fixture
@@ -17,7 +17,7 @@ def dispatcher() -> IFieldDispatcher:
         def generate(self, schema: Any) -> Any:
             return str
 
-        def get_type_name(self, obj: Any) -> str: ...
+        def get_type_name(self, obj: Any) -> str: ...  # type: ignore[empty-body]
 
     return MockDispatcher()
 
@@ -27,7 +27,7 @@ class TestContainerGenerator:
 
     @pytest.mark.parametrize('schema', [(list[str]), (dict[str, str]), (set[str])])
     def test_supports_if_schema_is_container(
-            self, schema: list | dict | set, container_generator: ContainerGenerator
+            self, schema: list | dict | set, container_generator: ContainerGenerator,
     ) -> None:
         """Tests supports method if schema is container."""
 
@@ -48,11 +48,11 @@ class TestContainerGenerator:
 
     @pytest.mark.parametrize(
         ('schema', 'expected_result'), [
-            (list[str], [str]), (dict[str, str], {'key': str, 'value': str}), (set[str], [str]), (tuple[str], [str])
-        ]
+            (list[str], [str]), (dict[str, str], {'key': str, 'value': str}), (set[str], [str]), (tuple[str], [str]),
+        ],
     )
     def test_generate_if_schema_is_dataclass(
-            self, schema, expected_result, container_generator: ContainerGenerator, dispatcher: IFieldDispatcher
+            self, schema, expected_result, container_generator: ContainerGenerator, dispatcher: IFieldDispatcher,
     ) -> None:
         """Tests generate method if schema is dataclass."""
 
@@ -61,7 +61,7 @@ class TestContainerGenerator:
         assert result == expected_result, f'Expected result {expected_result}, result {result}'
 
     def test_generate_if_schema_is_not_dataclass(
-            self, container_generator: ContainerGenerator, dispatcher: IFieldDispatcher
+            self, container_generator: ContainerGenerator, dispatcher: IFieldDispatcher,
     ) -> None:
         """Tests generate method if schema is not container."""
 

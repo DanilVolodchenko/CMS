@@ -3,8 +3,8 @@ from typing import Any
 import pytest
 from pydantic import BaseModel
 
-from infrastructure.generators.pydantic import PydanticGenerator
 from infrastructure.dispatcher import IFieldDispatcher
+from infrastructure.generators.pydantic import PydanticGenerator
 
 
 @pytest.fixture
@@ -18,7 +18,7 @@ def dispatcher() -> IFieldDispatcher:
         def generate(self, schema: Any) -> Any:
             return str
 
-        def get_type_name(self, obj: Any) -> str: ...
+        def get_type_name(self, obj: Any) -> str: ...  # type: ignore[empty-body]
 
     return MockDispatcher()
 
@@ -51,7 +51,7 @@ class TestDataclassGenerator:
         assert result == expected_result, f'Expected result {expected_result}, result {result}'
 
     def test_generate_if_schema_is_dataclass(
-            self, pydantic_generator: PydanticGenerator, dispatcher: IFieldDispatcher
+            self, pydantic_generator: PydanticGenerator, dispatcher: IFieldDispatcher,
     ) -> None:
         """Tests generate method if schema is pydantic model."""
 
@@ -63,7 +63,7 @@ class TestDataclassGenerator:
         assert result == expected_result, f'Expected result {expected_result}, result {result}'
 
     def test_generate_if_schema_is_not_dataclass(
-            self, pydantic_generator: PydanticGenerator, dispatcher: IFieldDispatcher
+            self, pydantic_generator: PydanticGenerator, dispatcher: IFieldDispatcher,
     ) -> None:
         """Tests generate method if schema is not pydantic model."""
 

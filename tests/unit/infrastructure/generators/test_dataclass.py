@@ -3,8 +3,8 @@ from typing import Any
 
 import pytest
 
-from infrastructure.generators.dataclass import DataclassGenerator
 from infrastructure.dispatcher import IFieldDispatcher
+from infrastructure.generators.dataclass import DataclassGenerator
 
 
 @pytest.fixture
@@ -18,7 +18,7 @@ def dispatcher() -> IFieldDispatcher:
         def generate(self, schema: Any) -> Any:
             return str
 
-        def get_type_name(self, obj: Any) -> str: ...
+        def get_type_name(self, obj: Any) -> str: ...  # type: ignore[empty-body]
 
     return MockDispatcher()
 
@@ -52,7 +52,7 @@ class TestDataclassGenerator:
         assert result == expected_result, f'Expected result {expected_result}, result {result}'
 
     def test_generate_if_schema_is_dataclass(
-            self, dataclass_generator: DataclassGenerator, dispatcher: IFieldDispatcher
+            self, dataclass_generator: DataclassGenerator, dispatcher: IFieldDispatcher,
     ) -> None:
         """Tests generate method if schema is dataclass."""
 
@@ -64,7 +64,7 @@ class TestDataclassGenerator:
         assert result == expected_result, f'Expected result {expected_result}, result {result}'
 
     def test_generate_if_schema_is_not_dataclass(
-            self, dataclass_generator: DataclassGenerator, dispatcher: IFieldDispatcher
+            self, dataclass_generator: DataclassGenerator, dispatcher: IFieldDispatcher,
     ) -> None:
         """Tests generate method if schema is not dataclass."""
 
