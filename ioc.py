@@ -33,6 +33,6 @@ class Container(BaseContainer):
         component_gateway=component_storage_gateway.cast,
     )
     get_component_by_page_interactor = providers.Singleton(
-        interactors.GetComponentsByPathInteractor,
+        interactors.GetComponentsByPageInteractor,
         component_gateway=component_storage_gateway.cast,
     )

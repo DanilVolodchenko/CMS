@@ -30,7 +30,7 @@ class GetComponentSchemaByNameInteractor:
         raise ComponentNotFoundError(f'Component `{name}` not found!')
 
 
-class GetComponentsByPathInteractor:
+class GetComponentsByPageInteractor:
     def __init__(self, component_gateway: IGetComponent) -> None:
         self._component_gateway = component_gateway
 

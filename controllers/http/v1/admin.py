@@ -18,7 +18,7 @@ def get_components_schema(
 
 
 @router.get('/components/{component_name}')
-def get_component_by_name(
+def get_component_schema_by_name(
         component_name: str,
         interactor: Annotated[
             interactors.GetComponentSchemaByNameInteractor, Depends(Container.get_component_schema_by_name_interactor),
