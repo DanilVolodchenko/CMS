@@ -1,4 +1,5 @@
 from typing import Any
+from unittest import mock
 
 import pytest
 
@@ -48,5 +49,46 @@ class TestFieldDispatcher:
         """Test method get_type_name if obj has not attr __name__."""
 
         result = dispatcher.get_type_name(cls())
+
+        assert result == expected_result, f'Expected result {expected_result}, result {result}'
+
+    def test_generate_if_generators_not_exists(self) -> None:
+        """Test method generate if generators not exists."""
+
+        mock_builder = mock.Mock()
+        mock_builder.get_generators.return_value = []
+        dispatcher = FieldDispatcher(builder=mock_builder)
+
+        result = dispatcher.generate(list)
+        expected_result = 'list'
+
+        assert result == expected_result, f'Expected result {expected_result}, result {result}'
+
+    def test_generate_if_generators_not_support_schema(self) -> None:
+        """Test method generate if generators not support schema."""
+
+        mock_generator = mock.Mock()
+        mock_generator.supports.return_value = False
+        mock_builder = mock.Mock()
+        mock_builder.get_generators.return_value = [mock_generator, mock_generator]
+        dispatcher = FieldDispatcher(builder=mock_builder)
+
+        result = dispatcher.generate(list)
+        expected_result = 'list'
+
+        assert result == expected_result, f'Expected result {expected_result}, result {result}'
+
+    def test_generate_if_generators_support_schema(self) -> None:
+        """Test method generate if generators support schema."""
+
+        mock_generator = mock.Mock()
+        mock_generator.supports.return_value = True
+        mock_generator.generate.return_value = 'list'
+        mock_builder = mock.Mock()
+        mock_builder.get_generators.return_value = [mock_generator]
+        dispatcher = FieldDispatcher(builder=mock_builder)
+
+        result = dispatcher.generate(list)
+        expected_result = 'list'
 
         assert result == expected_result, f'Expected result {expected_result}, result {result}'
