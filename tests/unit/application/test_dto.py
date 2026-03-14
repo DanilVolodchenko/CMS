@@ -1,7 +1,7 @@
 import dataclasses
 from typing import Any
 
-from application.dto import NewPageComponentDTO, ComponentDTO
+from application.dto import ComponentDTO, NewPageComponentDTO
 
 
 def test_new_page_component_dto_fields() -> None:
