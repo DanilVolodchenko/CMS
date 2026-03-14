@@ -11,7 +11,8 @@ class ContainerGenerator(IFieldGenerator):
     def supports(cls, schema: Any) -> bool:
         return get_origin(schema) is not None
 
-    def generate(self, schema: Any, dispatcher: IFieldDispatcher) -> Any:
+    @classmethod
+    def generate(cls, schema: Any, dispatcher: IFieldDispatcher) -> Any:
         origin = get_origin(schema)
         args = get_args(schema)
 

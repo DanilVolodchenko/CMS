@@ -23,7 +23,7 @@ class FieldDispatcher(IFieldDispatcher):
     def generate(self, schema: Any) -> Any:
         for generator in self._builder.get_generators():
             if generator.supports(schema):
-                return generator().generate(schema, self)
+                return generator.generate(schema, self)
 
         return self.get_type_name(schema)
 

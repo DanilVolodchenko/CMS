@@ -12,5 +12,6 @@ class ForwardRefGenerator(IFieldGenerator):
     def supports(cls, schema: Any) -> bool:
         return isinstance(schema, ForwardRef)
 
-    def generate(self, schema: Any, dispatcher: IFieldDispatcher) -> Any:
+    @classmethod
+    def generate(cls, schema: Any, dispatcher: IFieldDispatcher) -> Any:
         return dispatcher.generate(schema.evaluate())

@@ -12,6 +12,7 @@ class IFieldGenerator(abc.ABC):
     def supports(cls, schema: Any) -> bool:
         """Can support that type of schema."""
 
+    @classmethod
     @abc.abstractmethod
-    def generate(self, schema: Any, dispatcher: IFieldDispatcher) -> Any:
+    def generate(cls, schema: Any, dispatcher: IFieldDispatcher) -> Any:
         """Generate data from schema."""

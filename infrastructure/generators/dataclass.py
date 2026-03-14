@@ -12,7 +12,8 @@ class DataclassGenerator(IFieldGenerator):
     def supports(cls, schema: Any) -> bool:
         return dataclasses.is_dataclass(schema)
 
-    def generate(self, schema: Any, dispatcher: IFieldDispatcher) -> dict:
+    @classmethod
+    def generate(cls, schema: Any, dispatcher: IFieldDispatcher) -> dict:
         result = {}
 
         for field in dataclasses.fields(schema):
