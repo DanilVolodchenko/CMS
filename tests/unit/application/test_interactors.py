@@ -3,10 +3,10 @@ from unittest import mock
 
 import pytest
 
-from infrastructure import errors
 from application import interactors
 from application.dto import ComponentDTO, NewPageComponentDTO
 from domain.entities import PageDM
+from infrastructure import errors
 
 
 @pytest.fixture
