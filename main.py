@@ -1,3 +1,5 @@
+import logging
+
 import uvicorn
 
 from core.config import Config
@@ -9,4 +11,4 @@ config = Config()
 app = create_app(config.fastapi, version=__version__)
 
 if __name__ == '__main__':
-    uvicorn.run('main:app', reload=True)
+    uvicorn.run('main:app', reload=True, log_level=logging.CRITICAL)

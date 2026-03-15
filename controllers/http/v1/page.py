@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 
 from application import interactors
 from application.dto import NewPageComponentDTO
@@ -10,7 +10,7 @@ from ioc import Container
 router = APIRouter(prefix='/page', tags=['Page'])
 
 
-@router.get('/{page:path}/components')
+@router.get('/{page:path}/components', status_code=status.HTTP_200_OK, name='Get components for page.')
 def get_components(
         page: str,
         get_component_interactor: Annotated[
@@ -22,7 +22,7 @@ def get_components(
     return PageSchema(page=page_dm.page, components=page_dm.components)
 
 
-@router.post('/components')
+@router.post('/components', status_code=status.HTTP_201_CREATED, name='Create components for page.')
 def create_components(
         schema: PageSchema,
         get_component_interactor: Annotated[
