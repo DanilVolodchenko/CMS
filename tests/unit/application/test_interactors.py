@@ -3,7 +3,7 @@ from unittest import mock
 
 import pytest
 
-import errors
+from infrastructure import errors
 from application import interactors
 from application.dto import ComponentDTO, NewPageComponentDTO
 from domain.entities import PageDM

@@ -1,3 +1,4 @@
+import contextlib
 from typing import cast
 
 from fastapi import FastAPI, Request, status
@@ -10,7 +11,7 @@ from that_depends.providers import DIContextMiddleware
 from controllers.http import router
 from core.config import FastApiConfig
 from core.config_path import COVERAGE_TEST_PATH
-from errors import BaseError
+from infrastructure.errors import BaseError
 from infrastructure.builder import RegisterBuilder
 from infrastructure.components import footer, header, main
 from infrastructure.generators import container, dataclass, forward_ref, pydantic
@@ -38,7 +39,8 @@ def add_middlewares(app: FastAPI) -> None:
 
 
 def add_mounts(app: FastAPI) -> None:
-    app.mount('/coverage', StaticFiles(directory=COVERAGE_TEST_PATH, html=True), name='cov')
+    with contextlib.suppress(RuntimeError):
+        app.mount('/coverage', StaticFiles(directory=COVERAGE_TEST_PATH, html=True), name='cov')
 
 
 def add_exception_handlers(app: FastAPI) -> None:

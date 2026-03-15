@@ -1,7 +1,7 @@
 from application.dto import ComponentDTO, NewPageComponentDTO
 from application.interfaces import IGetComponent, ISaveComponent
 from domain import entities
-from errors import ComponentNotFoundError, PageNotFoundError
+from infrastructure.errors import ComponentNotFoundError, PageNotFoundError
 from infrastructure.builder import RegisterBuilder
 from infrastructure.dispatcher import IFieldDispatcher
 
