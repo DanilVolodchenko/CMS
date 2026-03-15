@@ -4,6 +4,7 @@ from typing import cast
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
+from loguru import logger
 from starlette.middleware import _MiddlewareFactory as StarletteMiddlewareFactory
 from that_depends import Provide, inject
 from that_depends.providers import DIContextMiddleware
@@ -11,10 +12,11 @@ from that_depends.providers import DIContextMiddleware
 from controllers.http import router
 from core.config import FastApiConfig
 from core.config_path import COVERAGE_TEST_PATH
-from infrastructure.errors import BaseError
 from infrastructure.builder import RegisterBuilder
 from infrastructure.components import footer, header, main
+from infrastructure.errors import BaseError
 from infrastructure.generators import container, dataclass, forward_ref, pydantic
+from infrastructure.middlewares import LoggingMiddleware
 from ioc import Container
 
 
@@ -35,6 +37,7 @@ def create_app(fastapi_conf: FastApiConfig, version: str) -> FastAPI:
 
 
 def add_middlewares(app: FastAPI) -> None:
+    app.add_middleware(cast(StarletteMiddlewareFactory, LoggingMiddleware), logger)
     app.add_middleware(cast(StarletteMiddlewareFactory, DIContextMiddleware), Container)
 
 
