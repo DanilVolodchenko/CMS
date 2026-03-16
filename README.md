@@ -46,3 +46,7 @@
 `docker build -t cms .` - создание образа
 
 `docker run -p 8000:8000 cms` - запуск контейнера
+
+## Процент покрытие тестами
+
+![coverage.png](coverage.png)
